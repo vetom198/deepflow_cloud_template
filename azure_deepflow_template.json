@@ -8,13 +8,7 @@
         "description": "Admin user name for VM"
       }
     },
-    "vmName": {
-      "type": "string",
-      "defaultValue": "vmName",
-      "metadata": {
-        "description": "The name of you Virtual Machine."
-      }
-    },
+
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -58,11 +52,18 @@
         "description": "Name of the Network Security Group"
       }
     },
+    "vmName": {
+      "type": "string",
+      "defaultValue": "deepflowpoc",
+      "metadata": {
+        "description": "The name of you Virtual Machine."
+      }
+    },
     "authenticationType": {
       "type": "string",
       "defaultValue": "password",
       "allowedValues": [
-        // "sshPublicKey",
+        "sshPublicKey",
         "password"
       ],
       "metadata": {
