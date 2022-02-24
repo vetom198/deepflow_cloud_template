@@ -62,7 +62,7 @@
       "type": "string",
       "defaultValue": "password",
       "allowedValues": [
-        "sshPublicKey",
+        // "sshPublicKey",
         "password"
       ],
       "metadata": {
@@ -222,7 +222,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2019-07-01",
-      "name": "[concat(variables('virtualMachineName'),'-', parameters('Cpu-Gpu'))]",
+      "name": "[variables('virtualMachineName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
