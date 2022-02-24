@@ -5,8 +5,8 @@
     "adminUsername": {
       "value": "GEN-UNIQUE"
     },
-    "adminPasswordOrKey": {
-      "value": "GEN-SSH-PUB-KEY"
+    "adminPassword": {
+      "value": "GEN_PASSWORD"
     }
   }
 }

@@ -61,7 +61,7 @@
     },
     "authenticationType": {
       "type": "string",
-      "defaultValue": "password",
+      "defaultValue": "sshPublicKey",
       "allowedValues": [
         "sshPublicKey",
         "password"
@@ -70,7 +70,7 @@
         "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
       }
     },
-    "adminPasswordOrKey": {
+    "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
@@ -101,7 +101,7 @@
         "publicKeys": [
           {
             "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
-            "keyData": "[parameters('adminPasswordOrKey')]"
+            "keyData": "[parameters('adminPassword')]"
           }
         ]
       }
@@ -257,7 +257,7 @@
         "osProfile": {
           "computerName": "[variables('virtualMachineName')]",
           "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPasswordOrKey')]",
+          "adminPassword": "[parameters('adminPassword')]",
           "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
         }
       }
@@ -279,7 +279,7 @@
           "fileUris": [
             "[uri('https://raw.githubusercontent.com/vetom198/deepflow_cloud_template/main/', concat('install_deepflow.sh'))]"
           ],
-          "commandToExecute": "[concat('bash install_deepflow.sh ', parameters('adminUsername'), ' ', parameters('adminPasswordOrKey'))]"
+          "commandToExecute": "[concat('bash install_deepflow.sh ', parameters('adminUsername'), ' ', parameters('adminPassword'))]"
         }
       }
     }
