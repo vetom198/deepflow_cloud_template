@@ -278,7 +278,7 @@
           "fileUris": [
             "[uri('https://raw.githubusercontent.com/vetom198/deepflow_cloud_template/main/', concat('install_deepflow.sh'))]"
           ],
-          "commandToExecute": "[concat('bash install_deepflow.sh', ' ' , reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).ipAddress , ' ' , parameters('adminUsername'), ' ', parameters('adminPassword'))]"
+          "commandToExecute": "[concat('bash install_deepflow.sh', ' ' , parameters('adminUsername'), ' ', parameters('adminPassword'))]"
         }
       }
     }
@@ -287,10 +287,6 @@
     "adminUsername": {
       "type": "string",
       "value": "[parameters('adminUsername')]"
-    },
-    "DeepFlowPortalURL":{
-      "type": "string",
-      "value": "[concat('http://',reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).ipAddress)]"
     }
   }
 }
