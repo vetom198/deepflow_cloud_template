@@ -278,7 +278,7 @@
           "fileUris": [
             "[uri('https://raw.githubusercontent.com/vetom198/deepflow_cloud_template/main/', concat('install_deepflow.sh'))]"
           ],
-          "commandToExecute": "[concat('bash install_deepflow.sh', ' ' , parameters('adminUsername'), ' ', parameters('adminPassword'))]"
+          "commandToExecute": "[concat('sudo bash install_deepflow.sh', ' ' , parameters('adminUsername'), ' ', parameters('adminPassword'))]"
         }
       }
     }
