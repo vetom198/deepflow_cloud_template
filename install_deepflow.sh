@@ -11,7 +11,7 @@ OP_USER="root"
 HOST_IP=$(hostname -I | awk '{print $1}')
 DOCKER_COMPOSE_VERSION=1.29.2
 PACKAGES=("net-tools","curl" "openssh-server" "nfs-common" "nfs-kernel-server" "gnupg2" "pass" "nvidia-container-runtime" )
-USER_HOME=/home/${OP_USER}
+USER_HOME=/${OP_USER}
 AIPAAS_HOME=${USER_HOME}/workspace/aipaas
 
 DEBIAN_FRONTEND=noninteractive
@@ -36,7 +36,7 @@ sudo useradd -m -s /bin/bash -G sudo ${OP_USER}
 
 
 ### create workspace
-mkdir /home/${OP_USER}/workspace
+mkdir -p ${USER_HOME}/workspace
 
 
 ### 
@@ -73,64 +73,12 @@ ssh-keygen -t rsa -N '' <<<''
 sudo -u user ssh-keygen -t rsa -N '' <<<''
 
 cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-cp ~/.ssh/id_rsa.pub /home/$OP_USER/.ssh/authorized_keys
+cp ~/.ssh/id_rsa.pub ${USER_HOME}/.ssh/authorized_keys
 
 ssh-keyscan -H $HOST_IP >> ~/.ssh/known_hosts
-ssh-keyscan -H $HOST_IP >> /home/$OP_USER/.ssh/known_hosts
+ssh-keyscan -H $HOST_IP >> ${USER_HOME}/.ssh/known_hosts
 
 echo exit | ssh "$OP_USER@$HOST_IP"
-
-
-
-# NODE_IMAGES=( \
-#         ############ 運算機資源監控 #########
-#         "prom/node-exporter:v1.0.0" \
-#         "google/cadvisor:v0.33.0" \
-#         "gpustatus-exporter:latest" \
-#         ####################################
-#         ############ Develop ###############
-#         "nvcr.io/nvidia/tensorflow:21.06-tf2-py3-aipaas2.5" \
-#         "nvcr.io/nvidia/pytorch:21.06-py3-aipaas2.5" \
-#         "nvcr.io/nvidia/mxnet:21.06-py3-aipaas2.5" \
-#         ####################################
-#         ############ Harbor ###############
-#         "goharbor/redis-photon:v2.2.2" \
-#         "goharbor/trivy-adapter-photon:v2.2.2" \
-#         "goharbor/harbor-registryctl:v2.2.2" \
-#         "goharbor/registry-photon:v2.2.2.3MB" \
-#         "goharbor/nginx-photon:v2.2.2.4MB" \
-#         "goharbor/harbor-log:v2.2.2" \
-#         "goharbor/harbor-jobservice:v2.2.2" \
-#         "goharbor/harbor-core:v2.2.2" \
-#         "goharbor/harbor-portal:v2.2.2.1MB" \
-#         "goharbor/harbor-db:v2.2.2" \
-#         "goharbor/prepare:v2.2.2" \
-#         ####################################
-#         )
-
-# images_list=`docker images --format "{{.Repository}}:{{.Tag}}"`
-
-
-# mkdir -p ~/workspace/aipaas-offline/node
-# for ((i=0; i < ${#NODE_IMAGES[@]}; i++))
-# do
-#     fname=$(echo ${NODE_IMAGES[$i]} | sed 's/[/:]/_/g')
-#     wget -P ~/workspace/aipaas-offline/node ${IMAGE_URL_PREFIX}portal/${fname}.tar
-# done
-
-# # portal
-# cd ~/workspace/aipaas-offline
-# for f in ./portal/*.tar; do
-#     echo -e "${f} ... ..."
-#     cat $f | docker load
-# done
-
-# # node
-# cd ~/workspace/aipaas-offline
-# for f in ./node/*.tar; do
-#     echo -e "${f} ... ..."
-#     cat $f | docker load
-# done
 
 
 
