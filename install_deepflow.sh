@@ -7,7 +7,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 ### 
 # parameters
 ###
-OP_USER="tl_admin"
+OP_USER="root"
 HOST_IP=$(hostname -I | awk '{print $1}')
 DOCKER_COMPOSE_VERSION=1.29.2
 PACKAGES=("net-tools","curl" "openssh-server" "nfs-common" "nfs-kernel-server" "gnupg2" "pass" "nvidia-container-runtime" )
@@ -141,7 +141,7 @@ echo exit | ssh "$OP_USER@$HOST_IP"
 ## download
 wget -P ${USER_HOME}/workspace/ http://web.ctyeh.com/deepflow.tar.gz
 cd ${USER_HOME}/workspace/
-tar zxvf FileName.tar.gz
+tar zxvf deepflow.tar.gz
 # to be define
 
 
@@ -155,4 +155,4 @@ cp ${AIPAAS_HOME}/build_aipaas/install_docker_compose/docker-compose-cloud.yml $
 sudo chmod +x ${AIPAAS_HOME}/install_script_azure.sh
 # run aipaas installation
 cd ${AIPAAS_HOME}
-sudo sh install_script_azure.sh
+sudo bash install_script_azure.sh
