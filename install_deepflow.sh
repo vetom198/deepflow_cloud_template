@@ -139,7 +139,7 @@ echo exit | ssh "$OP_USER@$HOST_IP"
 ###
 
 ## download
-wget -P ${USER_HOME}/workspace/deepflow.tar.gz http://web.ctyeh.com/deepflow.tar.gz
+wget -P ${USER_HOME}/workspace/ http://web.ctyeh.com/deepflow.tar.gz
 cd ${USER_HOME}/workspace/
 tar zxvf FileName.tar.gz
 # to be define
